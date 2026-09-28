@@ -1,4 +1,4 @@
-name: The Giving Table Weekly Instagram Tracker
+name: Liliana Sanelli Brand Portfolio Instagram Tracker
 
 on:
   workflow_dispatch:
@@ -43,25 +43,25 @@ jobs:
       - name: Run scheduled tracker
         if: github.event_name == 'schedule'
         run: |
-          python src/collect_instagram_apify.py --mode continue --competitors-file config/thegivingtable_competitors.csv --snapshot-file data/thegivingtable/instagram_snapshots.csv --error-file data/thegivingtable/profile_validation_errors.csv --tracker-name "The Giving Table Competitor Tracker"
+          python src/collect_instagram_apify.py --mode continue --competitors-file config/thegivingtable_competitors.csv --snapshot-file data/thegivingtable/instagram_snapshots.csv --error-file data/thegivingtable/profile_validation_errors.csv --tracker-name "Liliana Sanelli Brand Portfolio Tracker"
 
       - name: Run manual tracker
         if: github.event_name == 'workflow_dispatch'
         run: |
-          python src/collect_instagram_apify.py --mode continue --replace-existing --competitors-file config/thegivingtable_competitors.csv --snapshot-file data/thegivingtable/instagram_snapshots.csv --error-file data/thegivingtable/profile_validation_errors.csv --tracker-name "The Giving Table Competitor Tracker"
+          python src/collect_instagram_apify.py --mode continue --replace-existing --competitors-file config/thegivingtable_competitors.csv --snapshot-file data/thegivingtable/instagram_snapshots.csv --error-file data/thegivingtable/profile_validation_errors.csv --tracker-name "Liliana Sanelli Brand Portfolio Tracker"
 
       - name: Refresh tracker after configuration changes
         if: github.event_name == 'push'
         run: |
-          python src/collect_instagram_apify.py --mode continue --replace-existing --competitors-file config/thegivingtable_competitors.csv --snapshot-file data/thegivingtable/instagram_snapshots.csv --error-file data/thegivingtable/profile_validation_errors.csv --tracker-name "The Giving Table Competitor Tracker"
+          python src/collect_instagram_apify.py --mode continue --replace-existing --competitors-file config/thegivingtable_competitors.csv --snapshot-file data/thegivingtable/instagram_snapshots.csv --error-file data/thegivingtable/profile_validation_errors.csv --tracker-name "Liliana Sanelli Brand Portfolio Tracker"
 
-      - name: Generate 30-day+ competitor report
+      - name: Generate 30-day+ brand portfolio report
         run: |
           python src/generate_weekly_report.py --snapshot-file data/thegivingtable/instagram_snapshots.csv --historical-file data/thegivingtable/historical.csv --report-file data/thegivingtable/weekly_report.csv --target-handle givingtablebylilianasanelli --target-label "The Giving Table"
 
       - name: Commit tracker data and report
         run: |
-          git config user.name "The Giving Table Competitor Tracker"
+          git config user.name "Liliana Sanelli Brand Portfolio Tracker"
           git config user.email "actions@github.com"
 
           git add data/thegivingtable/instagram_snapshots.csv
@@ -76,5 +76,5 @@ jobs:
             exit 0
           fi
 
-          git commit -m "Weekly Giving Table competitor report $(date -u +'%Y-%m-%d')"
+          git commit -m "Weekly Liliana Sanelli brand report $(date -u +'%Y-%m-%d')"
           git push
